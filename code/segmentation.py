@@ -115,13 +115,6 @@ model_type = "vit_h"
 sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
 predictor = SamPredictor(sam)
 
-# RUN ONLY ONCE
-# Read images as tensors and generate SAM segmentation masks
-
-
-
-# Assuming image_tensors is a list of image tensors and image_names is a list of corresponding image names
-
 
 # Save the data using Pickle
 transform = transforms.ToTensor()
@@ -131,8 +124,7 @@ image_names_list = []
 y_tensors = []
 all_boxes = []
 
-# labels = train_labels
-labels = train_dfs[6]
+labels = train_labels
 box_dir = train_box_dir
 save_dir = "images/images_2016/sam/data/train/data7.pkl"
 image_dir = raw_train_image_dir
