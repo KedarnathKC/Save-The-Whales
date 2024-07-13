@@ -9,11 +9,11 @@ from ultralytics import YOLO
 
 def train():
 
-    # model = YOLO("yolov8s-pose.pt") 
-    model = YOLO('runs/pose/train11/weights/last.pt')
+    model = YOLO("yolov8s-pose.pt") 
+    # model = YOLO('runs/pose/train11/weights/last.pt')
     
     # Train the model
-    results = model.train(data="data/config_pose.yaml", epochs=150, imgsz=640, batch=16, name="Train11 continued",resume=True)
+    results = model.train(data="data/config_pose.yaml", epochs=50, imgsz=640, batch=16, name="AdamW lr0.02 lrf0.001",optimizer='AdamW',lr0=0.02, lrf=0.001)
 
     # results = model.predict(
     #     source='data/images/test/', 

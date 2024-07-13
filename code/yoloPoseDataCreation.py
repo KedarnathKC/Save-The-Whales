@@ -15,12 +15,12 @@ def move_files(df,src_root_dir,dest_dir):
           print(file_path)
           break
 
-def match_whale_bbox(bboxes,mid_x,mid_y):
+def match_whale_bbox(bboxes,mid_x,mid_y,img_h,img_w):
     min_index = 0
     min_dist=999999
     for i in range(len(bboxes)):
         cx,cy,_,_ = bboxes[i]
-        dist =( (cx-mid_x)**2 + (cy-mid_y)**2 )**(1/2)
+        dist =( (cx*img_w-mid_x)**2 + (cy*img_h-mid_y)**2 )**(1/2)
         if(dist<min_dist):
             min_dist = dist
             min_index = i
@@ -67,7 +67,7 @@ def main():
         h,w = row['Image.Length'], row['Image.Width']
         index = 0
         if len(bbox_dict[filename])>1:
-            index = match_whale_bbox(bbox_dict[filename],row.len_mid_x,row.len_mid_y)
+            index = match_whale_bbox(bbox_dict[filename],row.len_mid_x,row.len_mid_y,h,w)
         # print("Matched index: ",index)
         keypoints = normalize(list(row['rostrum_x':'fluke_y'].values),h,w)
         bbox = bbox_dict[filename][index]
